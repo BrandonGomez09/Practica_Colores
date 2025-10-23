@@ -1,4 +1,3 @@
-// lib/features/color_scheme_page/presentation/widgets/demonstration_group_widget.dart
 import 'package:flutter/material.dart';
 
 class DemonstrationGroupWidget extends StatelessWidget {
@@ -14,7 +13,7 @@ class DemonstrationGroupWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24.0), // Espacio debajo de cada grupo
+      padding: const EdgeInsets.only(bottom: 24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,7 +22,6 @@ class DemonstrationGroupWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(height: 16),
-          // El widget hijo contiene los elementos de demostración
           child,
         ],
       ),

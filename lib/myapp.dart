@@ -1,6 +1,6 @@
-// lib/myapp.dart
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:practica_navegacion/config/theme/app_theme.dart';
 import 'package:practica_navegacion/features/color_scheme_page/presentation/pages/color_scheme_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,21 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green, // Puedes cambiar este color semilla
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green, // Puedes cambiar este color semilla
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
-      themeMode: ThemeMode.system, // Usa el tema del sistema (claro/oscuro)
+
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: const ColorSchemePage(),
     );

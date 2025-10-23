@@ -1,4 +1,3 @@
-// lib/features/color_scheme_page/presentation/page/color_scheme_page.dart
 import 'package:flutter/material.dart';
 import 'package:practica_navegacion/features/color_scheme_page/presentation/widgets/demonstration_group_widget.dart';
 
@@ -7,153 +6,171 @@ class ColorSchemePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obtenemos el esquema de colores del tema actual
     final colors = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+
+    final List<Widget> textStyleWidgets = [
+      _TextStyleExample(name: 'displayLarge', style: textTheme.displayLarge),
+      _TextStyleExample(name: 'displayMedium', style: textTheme.displayMedium),
+      _TextStyleExample(name: 'displaySmall', style: textTheme.displaySmall),
+      _TextStyleExample(name: 'headlineLarge', style: textTheme.headlineLarge),
+      _TextStyleExample(name: 'headlineMedium', style: textTheme.headlineMedium),
+      _TextStyleExample(name: 'headlineSmall', style: textTheme.headlineSmall),
+      _TextStyleExample(name: 'titleLarge', style: textTheme.titleLarge),
+      _TextStyleExample(name: 'titleMedium', style: textTheme.titleMedium),
+      _TextStyleExample(name: 'titleSmall', style: textTheme.titleSmall),
+      _TextStyleExample(name: 'bodyLarge', style: textTheme.bodyLarge),
+      _TextStyleExample(name: 'bodyMedium', style: textTheme.bodyMedium),
+      _TextStyleExample(name: 'bodySmall', style: textTheme.bodySmall),
+      _TextStyleExample(name: 'labelLarge', style: textTheme.labelLarge),
+      _TextStyleExample(name: 'labelMedium', style: textTheme.labelMedium),
+      _TextStyleExample(name: 'labelSmall', style: textTheme.labelSmall),
+    ];
+
+
+
+    final List<Widget> typographyWidgetsWithSeparators = [];
+    for (int i = 0; i < textStyleWidgets.length; i++) {
+      typographyWidgetsWithSeparators.add(textStyleWidgets[i]);
+
+      if (i < textStyleWidgets.length - 1) {
+        typographyWidgetsWithSeparators.add(const Divider(height: 24));
+      }
+    }
+
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demostración de Colores'),
+        title: const Text('Colores y Tipografías'),
         backgroundColor: colors.surfaceContainer,
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          // --- GRUPO DE COLORES PRIMARIOS ---
+
           DemonstrationGroupWidget(
             title: 'Colores Primarios',
-            // Usamos una Columna para apilar los ejemplos de forma simple
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Ejemplo para primary y onPrimary
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text('Botón (usa primary y onPrimary)'),
+                  child: const Text('Botón (Primary)'),
                 ),
-                const SizedBox(height: 8),
-                // Ejemplo para primaryContainer y onPrimaryContainer
                 Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
                   color: colors.primaryContainer,
+                  padding: const EdgeInsets.all(8),
                   child: Text(
-                    'Contenedor (usa primaryContainer y onPrimaryContainer)',
+                    'Container (Primary)',
                     style: TextStyle(color: colors.onPrimaryContainer),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
           ),
 
-          // --- GRUPO DE COLORES SECUNDARIOS ---
           DemonstrationGroupWidget(
             title: 'Colores Secundarios',
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Ejemplo para secondary
-                FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: colors.secondary, // Usamos secondary
-                  child: const Icon(Icons.add),
+                Chip(
+                  label: const Text('Chip (Secondary)'),
+                  backgroundColor: colors.secondaryContainer,
+                  labelStyle: TextStyle(color: colors.onSecondaryContainer),
                 ),
-                const SizedBox(height: 8),
-                // Ejemplo para secondaryContainer y onSecondaryContainer
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  color: colors.secondaryContainer,
-                  child: Text(
-                    'Contenedor (usa secondaryContainer y onSecondaryContainer)',
-                    style: TextStyle(color: colors.onSecondaryContainer),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                Icon(Icons.add_task, color: colors.secondary),
               ],
             ),
           ),
 
-          // --- GRUPO DE COLORES TERCIARIOS ---
           DemonstrationGroupWidget(
             title: 'Colores Terciarios',
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Ejemplo para tertiary
-                Icon(
-                  Icons.star,
-                  color: colors.tertiary,
-                  size: 40,
-                ),
-                const SizedBox(height: 8),
-                // Ejemplo para tertiaryContainer y onTertiaryContainer
+                Icon(Icons.star, color: colors.tertiary, size: 30),
                 Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
                   color: colors.tertiaryContainer,
+                  padding: const EdgeInsets.all(8),
                   child: Text(
-                    'Contenedor (usa tertiaryContainer y onTertiaryContainer)',
+                    'Container (Tertiary)',
                     style: TextStyle(color: colors.onTertiaryContainer),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
           ),
 
-          // --- GRUPO DE COLORES DE SUPERFICIE Y FONDO ---
           DemonstrationGroupWidget(
-            title: 'Superficies y Fondos',
-            child: Column(
+            title: 'Superficies y Errores',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Ejemplo de surface y onSurface
                 Card(
+                  color: colors.surface,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Esta tarjeta usa "surface" y "onSurface"',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: colors.onSurface),
-                    ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Card (Surface)', style: TextStyle(color: colors.onSurface)),
                   ),
                 ),
-                const SizedBox(height: 8),
-                // Ejemplo de background y onBackground
-                Text(
-                  'El fondo de esta página es "background". Este texto usa "onBackground".',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: colors.onBackground),
+                Container(
+                  color: colors.errorContainer,
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    'Error',
+                    style: TextStyle(color: colors.onErrorContainer),
+                  ),
                 ),
+                Icon(Icons.error, color: colors.error, size: 30),
               ],
             ),
           ),
 
-          // --- GRUPO DE COLORES DE ERROR ---
-          DemonstrationGroupWidget(
-            title: 'Errores',
-            child: Column(
-              children: [
-                // Ejemplo de error
-                Icon(
-                  Icons.error,
-                  color: colors.error,
-                  size: 40,
-                ),
-                const SizedBox(height: 8),
-                // Ejemplo de errorContainer y onErrorContainer
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  color: colors.errorContainer,
-                  child: Text(
-                    'Contenedor (usa errorContainer y onErrorContainer)',
-                    style: TextStyle(color: colors.onErrorContainer),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+          const Divider(height: 48, thickness: 1),
+
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Text(
+              'Tipografías (TextTheme)',
+              style: textTheme.headlineSmall,
             ),
           ),
+
+          ...typographyWidgetsWithSeparators,
+
         ],
       ),
+    );
+  }
+}
+
+class _TextStyleExample extends StatelessWidget {
+  final String name;
+  final TextStyle? style;
+
+  const _TextStyleExample({required this.name, this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.primary,
+              fontFamily: 'monospace'
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Ejemplo de texto ($name)',
+          style: style,
+        ),
+      ],
     );
   }
 }
